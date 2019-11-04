@@ -20,14 +20,8 @@ sudo chmod 600 acme.json
 
 Start the container:
 ```
-$ docker-compose up
-```
 
-* Then open `localhost:8071` to access Odoo 12.0. If you want to start the server with a different port, change **8071** to another value:
-
-```
-ports:
- - "8071:8069"
+$ docker-compose up -d
 ```
 
 * Log file is printed @ **etc/odoo-server.log**
@@ -42,6 +36,10 @@ $ docker-compose up -d
 
 The **addons** folder contains custom addons. Just put your custom addons if you have any.
 
+# Included Odoo modules in folder addons:
+
+All modules from https://github.com/muk-it
+
 # Odoo configuration
 
 To change Odoo configuration, edit file: **etc/odoo.conf**.
@@ -51,8 +49,6 @@ To change Odoo configuration, edit file: **etc/odoo.conf**.
 * odoo:12.0
 * postgres:9.5
 
-# Included Odoo Modules:
-Alle Modules from https://github.com/muk-it
 
 # Odoo 12 screenshots
 
