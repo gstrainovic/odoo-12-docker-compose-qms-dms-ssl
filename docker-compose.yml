@@ -1,12 +1,35 @@
 version: '2'
 services:
+  traefik:
+    container_name: traefik
+    restart: always
+    image: traefik:1.7.2-alpine
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    networks:
+      - web
+    volumes:
+      - ./traefik.toml:/traefik.toml
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./acme.json:/acme.json
+    labels: 
+      - "traefik.frontend.rule=Host:traefik.strainovic-it.ch"
+      - "traefik.port=8080"
+
   db:
-    image: postgres:9.5
+    image: postgres:10
     environment:
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
     restart: always             # run as a service
+    networks:
+      - internal
 
   odoo12:
     image: odoo:12.0
@@ -18,6 +41,23 @@ services:
     command: -- --dev=reload
 #    command: odoo scaffold /mnt/extra-addons/test_module
     volumes:
+      - odoo-web-data:/var/lib/odoo
       - ./addons:/mnt/extra-addons
       - ./etc:/etc/odoo
     restart: always             # run as a service
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.frontend.rule=Host:odoo.strainovic-it.ch"
+      - "traefik.port=8069"
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false

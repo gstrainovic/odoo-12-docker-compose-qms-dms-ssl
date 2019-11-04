@@ -6,6 +6,18 @@ $ sudo chmod -R 777 addons
 $ sudo chmod -R 777 etc
 ```
 
+Init /etc files :
+```
+cp etc/odoo.conf.template etc/odoo.conf
+cp etc/odoo-server.log etc/odoo.server.log 
+```
+
+Create empty acme.json for Let's Encrypt SSL/HTTPS:
+```
+touch acme.json
+sudo chmod 600 acme.json
+```
+
 Start the container:
 ```
 $ docker-compose up
