@@ -51,6 +51,9 @@ To change Odoo configuration, edit file: **etc/odoo.conf**.
 * odoo:12.0
 * postgres:9.5
 
+# Included Odoo Modules:
+Alle Modules from https://github.com/muk-it
+
 # Odoo 12 screenshots
 
 ![odoo-12-welcome-docker](screenshots/odoo-12-welcome-screenshot.png)
