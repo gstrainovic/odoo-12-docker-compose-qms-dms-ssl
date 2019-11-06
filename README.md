@@ -8,26 +8,23 @@ $ sudo chmod -R 777 etc
 
 Init /etc files :
 ```
-cp etc/odoo.conf.template etc/odoo.conf
-cp etc/odoo-server.log etc/odoo.server.log 
+$ cp etc/odoo.conf.template etc/odoo.conf
+$ cp etc/odoo-server.log etc/odoo.server.log 
 ```
 
 Create empty acme.json for Let's Encrypt SSL/HTTPS:
 ```
-touch acme.json
-sudo chmod 600 acme.json
+$ touch acme.json
+$ sudo chmod 600 acme.json
 ```
 
-Start the container:
-```
-
-$ docker-compose up -d
-```
 
 * Log file is printed @ **etc/odoo-server.log**
+* Change domains and subdomains in docker-compose.yml
+* Change domains, subdomains, email, mh5 password in traefik.toml 
+* A mailcatcher is included, just change add in smtp odoo settings
 
 To run in detached mode, execute this command:
-
 ```
 $ docker-compose up -d
 ```

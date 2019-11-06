@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   traefik:
     container_name: traefik
@@ -51,6 +51,17 @@ services:
     labels:
       - "traefik.frontend.rule=Host:odoo.strainovic-it.ch"
       - "traefik.port=8069"
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    networks:
+      - web
+      - internal
+    labels:
+      - "traefik.frontend.rule=Host:mailhog.strainovic-it.ch"
+      - "traefik.port=8025"
 
 volumes:
   odoo-web-data:

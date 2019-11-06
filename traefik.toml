@@ -13,6 +13,8 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
     address = ":443"
       [entryPoints.https.tls]
+      [entryPoints.https.auth.basic]
+       users = ["gstrainovic:$apr1$yuepGvM.$BbrP96150XNzXTg5OcvGU0"]
  
 [api]
 entrypoint="dashboard"
